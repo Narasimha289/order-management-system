@@ -1,81 +1,126 @@
-# E-commerce Order Management System
+# Order Management System
 
-A Java-based backend application for managing users and products, built with Spring Boot and PostgreSQL.
+A backend REST API application built with Java and Spring Boot to manage products, orders, and users. The application uses PostgreSQL for data persistence and JWT-based authentication to protect API endpoints.
 
-## Project Status
+## Live Demo
 
-**In Progress** — developed as a Java Developer portfolio project.
+- **Application:** https://order-management-system-f9wt.onrender.com
+- **Swagger API Documentation:** https://order-management-system-f9wt.onrender.com/swagger-ui/index.html
 
-## Technology Stack
+## Features
+
+- User registration and login
+- JWT-based authentication and authorization
+- Product management through REST APIs
+- Order management through REST APIs
+- PostgreSQL database integration
+- Database schema versioning and migrations using Flyway
+- Request validation
+- API documentation using Swagger UI
+- Password hashing with BCrypt
+- Centralized application configuration through environment variables
+
+## Technologies Used
 
 - **Language:** Java 21
-- **Framework:** Spring Boot
+- **Framework:** Spring Boot 3.5
 - **Database:** PostgreSQL
-- **Data Access:** Spring Data JPA
-- **Database Migrations:** Flyway
-- **Build Tool:** Maven
+- **Persistence:** Spring Data JPA, Hibernate
 - **Security:** Spring Security, JWT, BCrypt
+- **Database Migrations:** Flyway
+- **Validation:** Jakarta Bean Validation
+- **Build Tool:** Maven
+- **API Documentation:** Springdoc OpenAPI / Swagger UI
+- **Deployment:** Render
+- **Database Hosting:** Neon PostgreSQL
 
-## Implemented Features
+## API Endpoints
 
-- User registration and login API components
-- Product management API components
-- Service and repository layers
-- DTOs for request and response handling
-- JWT-based authentication configuration
-- Centralized exception handling
-- Versioned database schema migrations using Flyway
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/register` | Register a user |
+| POST | `/api/auth/login` | Authenticate a user |
+| GET | `/api/products` | Retrieve all products |
+| GET | `/api/products/{id}` | Retrieve a product by ID |
+| POST | `/api/products` | Create a product |
+| PUT | `/api/products/{id}` | Update a product |
+| DELETE | `/api/products/{id}` | Delete a product |
 
-## Prerequisites
+Product endpoints require authentication with a valid JWT token.
 
-- Java 21
+Explore the API and its request schemas through the live Swagger documentation linked above.
+
+## Run Locally
+
+### Prerequisites
+
+- Java 21 or later
 - PostgreSQL
 - Git
 
-## Local Setup
+### 1. Clone the repository
 
-1. Clone this repository:
+```bash
+git clone https://github.com/Narasimha289/order-management-system.git
+cd order-management-system
+```
 
-   ```bash
-   git clone https://github.com/Narasimha289/order-management-system.git
-   cd order-management-system
-   ```
+### 2. Configure environment variables
 
-2. Create a PostgreSQL database named `order_management_system`.
+Set the following environment variables before starting the application:
 
-3. Configure the following environment variables in your run environment:
+| Variable | Description |
+|---|---|
+| `DB_URL` | PostgreSQL JDBC connection URL |
+| `DB_USERNAME` | PostgreSQL username |
+| `DB_PASSWORD` | PostgreSQL password |
+| `JWT_SECRET` | Secret key used to sign JWTs |
 
-   - `DB_URL` — JDBC URL for your PostgreSQL database
-   - `DB_USERNAME` — PostgreSQL username
-   - `DB_PASSWORD` — PostgreSQL password
-   - `JWT_SECRET` — secret used by the application's JWT implementation
+Example JDBC URL:
 
-4. Run the application using the Maven Wrapper:
+```text
+jdbc:postgresql://localhost:5432/order_management_system
+```
 
-   **Windows PowerShell:**
+Configure the database credentials and create the database before running the application. Use a sufficiently long, secure JWT secret and never commit real credentials to GitHub.
 
-   ```powershell
-   .\mvnw.cmd spring-boot:run
-   ```
+### 3. Run the application
 
-   **Linux/macOS:**
+On Windows:
 
-   ```bash
-   ./mvnw spring-boot:run
-   ```
+```powershell
+.\mvnw.cmd spring-boot:run
+```
 
-## Database Migrations
+On macOS or Linux:
 
-Flyway manages the database schema migrations located in `src/main/resources/db/migration`.
+```bash
+./mvnw spring-boot:run
+```
 
-## Future Improvements
+The application uses port `8080` by default unless a different port is supplied through the `PORT` environment variable.
 
-- Expand automated tests
-- Add further order-management functionality
-- Improve API documentation
+### 4. Open Swagger UI
+
+Once the application is running, visit:
+
+```text
+http://localhost:8080/swagger-ui/index.html
+```
+
+Use the authentication endpoints to register and log in. Supply the returned JWT when calling protected endpoints.
+
+## Configuration and Security
+
+- Database credentials and JWT signing secrets are supplied through environment variables.
+- Passwords are hashed using BCrypt.
+- Spring Security protects endpoints that require authentication.
+- Flyway manages database migrations.
+- The application is configured to validate the database schema against the entity mappings.
 
 ## Author
 
-Narasimha Reddy Kodekond
+**Narasimha**
 
-GitHub: [Narasimha289](https://github.com/Narasimha289)
+- GitHub: https://github.com/Narasimha289
+
